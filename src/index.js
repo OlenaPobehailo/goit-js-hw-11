@@ -19,7 +19,7 @@ let searchQuery = '';
 //console.log(url);
 let images = [];
 
-function onFormSubmit(e) {
+async function onFormSubmit(e) {
   e.preventDefault();
   searchQuery = e.currentTarget.searchQuery.value;
 
