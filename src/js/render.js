@@ -1,35 +1,40 @@
-import getRefs from "./get-refs";
+import getRefs from './get-refs';
 const refs = getRefs();
 
- export default function renderGallery(images) {
-    const markup = images
-      .map(image => {
-        return `
+export default function renderGallery(images) {
+  const markup = images
+    .map(image => {
+      return `
+     
+
           <div class="photo-card">
-              <img src="${image.webformatURL}" alt="${image.tags}" loading="lazy" />
+          <a class="gallery__item" href="${image.largeImageURL}" width='320'>
+              <img class='gallery-img'src="${image.webformatURL}" alt="${image.tags}" loading="lazy" />
+              </a>
               <div class="info">
-              <p class="info-item">
-                  <b>Likes</b>
-                  <b>${image.likes}</b>
-  
-              </p>
-              <p class="info-item">
-                  <b>Views</b>
-                  <b>${image.views}</b>
-              </p>
-              <p class="info-item">
-                  <b>Comments</b>
-                  <b>${image.comments}</b>
-  
-              </p>
-              <p class="info-item">
-                  <b>Downloads</b>
-                  <b>${image.downloads}</b>
-              </p>
+                <p class="info-item">
+                    <b>Likes</b>
+                    <span>${image.likes}</span>   
+                </p>
+                <p class="info-item">
+                    <b>Views</b>
+                    <span>${image.views}</span>
+                </p>
+                <p class="info-item">
+                    <b>Comments</b>
+                    <span>${image.comments}</span>
+    
+                </p>
+                <p class="info-item">
+                    <b>Downloads</b>
+                    <span>${image.downloads}</span>
+                </p>
               </div>
-          </div>`;
-      })
-      .join('');
-    refs.gallery.innerHTML = markup;
-  }
-  
+        
+          </div>
+         
+        `;
+    })
+    .join('');
+  refs.gallery.innerHTML = markup;
+}

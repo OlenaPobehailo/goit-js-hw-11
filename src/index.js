@@ -1,66 +1,44 @@
-// const refs = {
-//   searchForm: document.querySelector('.search-form'),
-//   gallery: document.querySelector('.gallery'),
-// };
+import SimpleLightbox from 'simplelightbox';
 
 import getRefs from './js/get-refs';
-import {  BASE__URL, fetchImages } from './js/api-service';
-import renderGallery from './js/render'
+import { BASE__URL, fetchImages } from './js/api-service';
+import renderGallery from './js/render';
 
 const refs = getRefs();
-
+const ADD_URL = '&image_type=photo&orientation=horizontal&safesearch=true';
 refs.searchForm.addEventListener('submit', onFormSubmit);
-
+refs.loadMoreBtn.addEventListener('click', onLoadMoreClick);
 let searchQuery = '';
-// const BASE__URL =
-//   'https://pixabay.com/api/?key=32179167-903c9e169edcad7e661a9574c&q=';
-// const ADD_URL = '&image_type=photo&pretty=true';
-// const url = BASE__URL + searchQuery + ADD_URL;
-//console.log(url);
+
 let images = [];
+
+refs.loadMoreBtn.hidden = true;
 
 async function onFormSubmit(e) {
   e.preventDefault();
   searchQuery = e.currentTarget.searchQuery.value;
 
-  const url = BASE__URL + searchQuery;
+  const url = BASE__URL + searchQuery + ADD_URL;
 
   console.log('searchQuery', searchQuery);
   console.log('url', url);
 
   await fetchImages(url).then(images => renderGallery(images));
 
+  let lightbox = new SimpleLightbox('.gallery a', {
+    // captions: true,
+    // captionsData: 'alt',
+    // captionSelector: 'img',
+    // captionPosition: 'bottom',
+    // captionDelay: 250,
+  });
+  
+
+  //refs.loadMoreBtn.hidden = false;
+
   //searchQuery = '';
 }
 
-// function renderGallery(images) {
-//   const markup = images
-//     .map(image => {
-//       return `
-//         <div class="photo-card">
-//             <img src="${image.webformatURL}" alt="${image.tags}" loading="lazy" />
-//             <div class="info">
-//             <p class="info-item">
-//                 <b>Likes</b>
-//                 <b>${image.likes}</b>
-
-//             </p>
-//             <p class="info-item">
-//                 <b>Views</b>
-//                 <b>${image.views}</b>
-//             </p>
-//             <p class="info-item">
-//                 <b>Comments</b>
-//                 <b>${image.comments}</b>
-
-//             </p>
-//             <p class="info-item">
-//                 <b>Downloads</b>
-//                 <b>${image.downloads}</b>
-//             </p>
-//             </div>
-//         </div>`;
-//     })
-//     .join('');
-//   refs.gallery.innerHTML = markup;
-// }
+function onLoadMoreClick() {
+  refs.loadMoreBtn.hidden = true;
+}
