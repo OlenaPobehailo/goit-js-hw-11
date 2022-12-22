@@ -28,7 +28,7 @@ function onFormSubmit(e) {
   console.log('searchQuery', searchQuery);
   console.log('url', url);
 
-  fetchImages(url).then(images => renderGallery(images));
+  await fetchImages(url).then(images => renderGallery(images));
 
   //searchQuery = '';
 }
