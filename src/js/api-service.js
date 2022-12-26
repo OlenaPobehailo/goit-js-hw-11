@@ -7,7 +7,7 @@ export class ImagesApiService {
   constructor() {
     this.searchQuery = '';
     this.page = 1;
-    this.per_page = 200;
+    this.per_page = 40;
     this.image_type = 'photo';
     this.orientation = 'horizontal';
     this.safesearch = true;
