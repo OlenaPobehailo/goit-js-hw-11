@@ -2,11 +2,9 @@ import getRefs from './get-refs';
 const refs = getRefs();
 
 export default function renderGallery(images) {
-  const markup = images
+  return images
     .map(image => {
       return `
-     
-
           <div class="photo-card">
           <a class="gallery__item" href="${image.largeImageURL}" width='320'>
               <img class='gallery-img'src="${image.webformatURL}" alt="${image.tags}" loading="lazy" />
@@ -36,5 +34,4 @@ export default function renderGallery(images) {
         `;
     })
     .join('');
-  refs.gallery.innerHTML = markup;
 }
