@@ -27,14 +27,24 @@ export class ImagesApiService {
     const url = `${BASE_URL}?key=${KEY}&q=${this.searchQuery}&${searchParams}`;
 
     const response = await axios.get(url);
-    if (response) {
+
+    try {
       this.maxPages = response.data.totalHits;
       const images = await response.data.hits;
       this.total = response.data.totalHits;
       this.incrementPage();
       return images;
+    } catch (error) {
+      throw new Error(response.statusText);
     }
-    throw new Error(response.statusText);
+    //   if (response) {
+    //     this.maxPages = response.data.totalHits;
+    //     const images = await response.data.hits;
+    //     this.total = response.data.totalHits;
+    //     this.incrementPage();
+    //     return images;
+    //   }
+    //   throw new Error(response.statusText);
   }
 
   get query() {
